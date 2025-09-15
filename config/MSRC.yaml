@@ -1,0 +1,22 @@
+dataset: MSRC
+save_dir: "./results/${dataset}"
+pretrain_epochs: 200
+epochs: 900
+testing: true   
+pretrain_weights: "./results/${dataset}/ae_weights.pth"
+save: false 
+weights: "./results/${dataset}/model_final.pth" 
+train_ae: false
+pre_batch_size: 256
+batch_size: 256
+pre_lr: 0.0001
+lr: 0.00001
+update_interval: 30  
+cluster_interval: 9999   # no work
+embed_dim: [128, 128, 128, 128, 128]   
+ae_weight: 1  
+dg_weight: 0.01
+contrastive_weight_row: 0.001 # weight of contrastive loss
+contrastive_weight_column: 0.001 # weight of contrastive loss
+seed: 42
+normalize: 0

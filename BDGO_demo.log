@@ -1,0 +1,11 @@
+nohup: ignoring input
+当前进程 PID: 3495388
+++++++++++++++++++++++++++++++  Parameters  ++++++++++++++++++++++++++++++
+Namespace(dataset='BDGP', save_dir='./results/BDGP', pretrain_epochs=200, epochs=900, testing=True, pretrain_weights='./results/BDGP/ae_weights.pth', save=False, weights='./results/BDGP/model_final.pth', train_ae=False, pre_batch_size=256, batch_size=256, pre_lr=0.0001, lr=1e-05, update_interval=30, cluster_interval=9999, embed_dim=BoxList([128, 128]), ae_weight=1, dg_weight=0.01, contrastive_weight_row=0.001, contrastive_weight_column=0.001, seed=42, normalize=0)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+load: BDGP
+(2500, 1750)
+(2500, 79)
+(2500,)
+test
+Unique: acc: 0.99280, nmi: 0.97461, ari: 0.98208, pur: 0.99280

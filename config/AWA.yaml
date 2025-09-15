@@ -1,0 +1,22 @@
+dataset: AWA
+save_dir: "./results/${dataset}"
+pretrain_epochs: 200
+epochs: 900
+testing: true   # Testing the clustering performance with provided weights
+pretrain_weights: "./results/${dataset}/ae_weights.pth"
+save: false # save the weights
+weights: "./results/${dataset}/model_final.pth"  # Model weights, used for testing
+train_ae: false
+pre_batch_size: 256
+batch_size: 256
+pre_lr: 0.0001
+lr: 0.00001
+update_interval: 30 
+cluster_interval: 9999   # no work
+embed_dim: [128, 128, 128, 128, 128, 128, 128]  
+ae_weight: 1  
+dg_weight: 0.0001
+contrastive_weight_row: 0.0001 
+contrastive_weight_column: 0.0001
+seed: 42
+normalize: 0

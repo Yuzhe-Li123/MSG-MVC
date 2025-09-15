@@ -1,0 +1,8 @@
+nohup: ignoring input
+当前进程 PID: 3567944
+++++++++++++++++++++++++++++++  Parameters  ++++++++++++++++++++++++++++++
+Namespace(dataset='Caltech-4V', save_dir='./results/Caltech-4V', pretrain_epochs=200, epochs=900, testing=True, pretrain_weights='./results/Caltech-4V/ae_weights.pth', save=False, weights='./results/Caltech-4V/model_final.pth', train_ae=False, pre_batch_size=256, batch_size=256, pre_lr=0.0001, lr=1e-05, update_interval=30, cluster_interval=9999, embed_dim=BoxList([128, 128, 128, 128]), ae_weight=1, dg_weight=0.01, contrastive_weight_row=0.001, contrastive_weight_column=0.001, seed=42, normalize=0)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+load: Caltech-4V
+test
+Unique: acc: 0.83929, nmi: 0.71576, ari: 0.68040, pur: 0.83929
