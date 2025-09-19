@@ -12,7 +12,7 @@ from cuml.cluster import KMeans as cuKMeans
 from sklearn.cluster import KMeans as skKMeans
 import torch
 from torch.utils.data import DataLoader
-from models.MIMVC import MIMVC
+from models.MSGMVC import MSGMVC
 import cupy as cp
 import torch.nn as nn
 from torch.utils.dlpack import to_dlpack
@@ -283,8 +283,8 @@ class Trainer():
             new_indices = self.evaluate_unique_cluster(y_pred_uq, centers_uq, features_uq)
             # new_indices = self.evaluate_unique_cluster_views(y_pred_sp, centers_sp, features_sp)
             is_updated =  self.model.update_best_indice(new_indices)
-            # print('Best Indicators: ACC=%.5f, NMI=%.5f, ARI=%.5f, PUR = %.5f' % 
-            #             (self.model.best_indice['acc'], self.model.best_indice['nmi'],self.model.best_indice['ari'],self.model.best_indice['pur']))
+            print('Best Indicators: ACC=%.5f, NMI=%.5f, ARI=%.5f, PUR = %.5f' % 
+                        (self.model.best_indice['acc'], self.model.best_indice['nmi'],self.model.best_indice['ari'],self.model.best_indice['pur']))
             if is_updated is True and self.args.save is True:
                 print('saving model to:', self.args.weights)
                 self.model.save_model()
@@ -347,8 +347,8 @@ class Trainer():
                     new_indices = self.evaluate_unique_cluster(y_pred_uq, centers_uq, features_uq)
                     # new_indices = self.evaluate_unique_cluster_views(y_pred_sp, centers_sp, features_sp)
                     is_updated =  self.model.update_best_indice(new_indices)
-                    # print('Best Indicators: ACC=%.5f, NMI=%.5f, ARI=%.5f, PUR = %.5f' % 
-                    #     (self.model.best_indice['acc'], self.model.best_indice['nmi'],self.model.best_indice['ari'],self.model.best_indice['pur']))
+                    print('Best Indicators: ACC=%.5f, NMI=%.5f, ARI=%.5f, PUR = %.5f' % 
+                        (self.model.best_indice['acc'], self.model.best_indice['nmi'],self.model.best_indice['ari'],self.model.best_indice['pur']))
                     if is_updated is True and self.args.save is True:
                         print('saving model to:', self.args.weights)
                         self.model.save_model()
@@ -363,8 +363,8 @@ class Trainer():
                     # new_indices = self.evaluate_unique_cluster(y_pred_uq, centers_uq, features_uq)
                     # new_indices = self.evaluate_unique_cluster_views(y_pred_sp, centers_sp, features_sp)
                     is_updated =  self.model.update_best_indice(new_indices)
-                    # print('Best Indicators: ACC=%.5f, NMI=%.5f, ARI=%.5f, PUR = %.5f' % 
-                    #     (self.model.best_indice['acc'], self.model.best_indice['nmi'],self.model.best_indice['ari'],self.model.best_indice['pur']))
+                    print('Best Indicators: ACC=%.5f, NMI=%.5f, ARI=%.5f, PUR = %.5f' % 
+                        (self.model.best_indice['acc'], self.model.best_indice['nmi'],self.model.best_indice['ari'],self.model.best_indice['pur']))
                     if is_updated is True and self.args.save is True:
                         print('saving model to:', self.args.weights)
                         self.model.save_model()

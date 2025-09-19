@@ -11,7 +11,7 @@ import cupy as cp
 from cuml.cluster import KMeans as cuKMeans
 import torch
 from torch.utils.data import DataLoader
-from models.MIMVC import MIMVC
+from models.MSGMVC import MSGMVC
 import cupy as cp
 import torch.nn as nn
 from torch.utils.dlpack import to_dlpack
@@ -37,19 +37,42 @@ def contrastive_loss_row(y_true: torch.Tensor,
     Q_log = torch.log(Q + eps)
     P_log = torch.log(P + eps)
     N = P.size(0)
-    targets = torch.arange(N, device=P.device)
-
-    # view1 -> view2
-    logits1 = (P @ Q_log.t())/tau
-    # loss = F.nll_loss(logits, targets, reduction="mean") 
-    loss1 = F.cross_entropy(logits1, targets, reduction="mean")
-    
-    # view2 -> view1YTF10
-    logits2 = (Q @ P_log.t()) / tau
-    loss2 = F.cross_entropy(logits2, targets, reduction="mean")
+    loss1 = -(P * Q).sum(dim=1).mean() / tau
+    loss2 = -(Q * P).sum(dim=1).mean() / tau
 
     # symmetric
     return (loss1 + loss2) / 2
+
+
+
+# def contrastive_loss_row(y_true: torch.Tensor,
+#                            y_pred: torch.Tensor,
+#                            tau: float = 1,
+#                            eps: float = 1e-12):
+#     """
+#     """
+#     # 防止概率为0
+
+#     P = torch.clamp(y_true, min=eps)
+#     Q = torch.clamp(y_pred, min=eps)
+#     P = P / P.sum(dim=1, keepdim=True)
+#     Q = Q / Q.sum(dim=1, keepdim=True)
+#     Q_log = torch.log(Q + eps)
+#     P_log = torch.log(P + eps)
+#     N = P.size(0)
+#     targets = torch.arange(N, device=P.device)
+
+#     # view1 -> view2
+#     logits1 = (P @ Q_log.t())/tau
+#     # loss = F.nll_loss(logits, targets, reduction="mean") 
+#     loss1 = F.cross_entropy(logits1, targets, reduction="mean")
+    
+#     # view2 -> view1YTF10
+#     logits2 = (Q @ P_log.t()) / tau
+#     loss2 = F.cross_entropy(logits2, targets, reduction="mean")
+
+#     # symmetric
+#     return (loss1 + loss2) / 2
 
 
 def contrastive_loss_column(y_true: torch.Tensor,

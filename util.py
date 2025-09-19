@@ -10,6 +10,7 @@ import distinctipy
 from sklearn.preprocessing import LabelEncoder
 import matplotlib.cm as cm
 import seaborn as sns
+import torch.nn.functional as F
 
 def variance_scaling_init(tensor, scale=1./3., mode='fan_in', distribution='uniform'):
     fan_in, fan_out = nn.init._calculate_fan_in_and_fan_out(tensor)
@@ -48,6 +49,11 @@ def enhance_distribution(p, alpha=2.0, eps=1e-12):
     p = p.clamp_min(eps)
     w = p ** alpha
     return w / w.sum(dim=1, keepdim=True)
+
+# def enhance_distribution(p):
+#     idx = torch.argmax(p, dim=1)
+#     p_onehot = F.one_hot(idx, num_classes=p.size(1)).float()
+#     return p_onehot
 
 
 def plot_tsne(features, cluster_labels, save_dir, seed):

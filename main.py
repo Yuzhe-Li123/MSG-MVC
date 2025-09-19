@@ -23,7 +23,7 @@ import string
 import cupy as cp
 import torch
 from torch.utils.data import DataLoader
-from models.MIMVC import MIMVC
+from models.MSGMVC import MSGMVC
 from trainer import Trainer
 from loss import mimvc_loss
 from torch.optim.lr_scheduler import CosineAnnealingLR
@@ -147,7 +147,7 @@ def substitute_variables(value, variables):
 
 import argparse
 
-device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 data = 'BDGP'
 # data = "ALOI"
 parser = argparse.ArgumentParser(description='main')
@@ -173,7 +173,7 @@ if __name__ == "__main__":
     multi_view_dataset = MultiViewDataset(args.dataset)
     pre_train_dataloader = DataLoader(multi_view_dataset, batch_size = args.pre_batch_size, shuffle = True, num_workers = 0)
     train_dataloader = DataLoader(multi_view_dataset, batch_size = args.batch_size, shuffle = True, num_workers = 0)
-    model = MIMVC(
+    model = MSGMVC(
         num_samples = len(multi_view_dataset),
         n_clusters = multi_view_dataset.get_num_clusters(),
         view_shape = multi_view_dataset.get_views(), 
