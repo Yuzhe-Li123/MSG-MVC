@@ -1,6 +1,6 @@
 # Multi-granularity Information-guided Multi-view Clustering
 
-This repo contains the code of the paper: Multi-granularity Information-guided Multi-view Clustering
+This repo contains the code of the paper: Multi-granularity Information-guided Multi-view Clustering. The detailed derivation of the loss function is provided in [loss_derivation.pdf](./loss_derivation.pdf).
 
 ## Requirements
 
