@@ -54,92 +54,6 @@ def set_seed(seed):
     #     torch.use_deterministic_algorithms(True)
 
 
-# def _make_data_and_model(args):
-#     # prepare dataset
-#     x, y = load_data_conv(args.dataset)
-#     view = len(x)
-#     view_shapes = []
-#     Loss = []
-#     Loss_weights = []
-#     lr_schedule = tf.keras.optimizers.schedules.CosineDecay(
-#         initial_learning_rate=args.lr,
-#         decay_steps=args.maxiter
-#     )
-
-#     # prepare optimizer
-#     optimizer = Adam(learning_rate = lr_schedule)
-#     # prepare the model
-#     n_clusters = len(np.unique(y))
-#     # n_clusters = 40   # over clustering
-#     print("n_clusters:" + str(n_clusters))
-#     # lc = 0.1
-
-#     model = MvDEC(filters=[32, 64, 128, 10],num_samples=y.shape[0],  n_clusters=n_clusters, view_shape=view_shapes, embed_dim = args.embed_dim)
-
-#     model.compile(optimizer=optimizer, loss=Loss, loss_weights=Loss_weights)
-#     return x, y, model
-
-
-# def train(args):
-#     # get data and mode
-#     #x, y, model = _make_data_and_model(args)
-#     # pretraining
-#     t0 = time()
-#     # 创建该数据集的相关文件夹
-#     if not os.path.exists(args.save_dir):
-#         os.makedirs(args.save_dir)
-#     if args.train_ae is False and os.path.exists(args.pretrain_dir):  # load pretrained weights
-#         # model.autoencoder.load_weights(args.pretrain_dir)
-#         # model.load_weights(args.pretrain_dir)
-#     else:  # train
-#         optimizer = Adam(lr=args.pre_lr)
-#         print()
-#         print('------------------------------pretrain-----------------------------------')
-#         print()
-#         model.pretrain(x, y, optimizer=optimizer, epochs=args.pretrain_epochs,
-#                             batch_size=args.pre_batch_size, save_dir=args.save_dir, verbose=args.verbose)
-#         args.pretrain_dir = args.save_dir + '/ae_weights.h5'
-#     t1 = time()
-#     print("Time for pretraining: %ds" % (t1 - t0))
-
-#     # clustering
-#     # DEMVC, IDEC, DEC
-#     # y_pred, y_mean_pred = model.fit(arg=args, x=x, y=y, maxiter=args.maxiter,
-#     #                                            batch_size=args.batch_size, UpdateCoo=args.UpdateCoo,
-#     #                                            save_dir=args.save_dir)
-#     # SDMVC
-#     model.new_fit(arg=args, x=x, y=y, maxiter=args.maxiter,
-#                                     batch_size=args.batch_size, UpdateCoo=args.UpdateCoo,
-#                                     save_dir=args.save_dir, args = args)
-#     # if y is not None:
-#     #     for view in range(len(x)):
-#     #         print('Final: acc=%.4f, nmi=%.4f, ari=%.4f' %
-#     #                 (Nmetrics.acc(y, y_pred[view]), Nmetrics.nmi(y, y_pred[view]), Nmetrics.ari(y, y_pred[view])))
-#     #     print('Final: acc=%.4f, nmi=%.4f, ari=%.4f' %
-#     #               (Nmetrics.acc(y, y_mean_pred), Nmetrics.nmi(y, y_mean_pred), Nmetrics.ari(y, y_mean_pred)))
-
-#     # t2 = time()
-#     # print("Time for pretaining, clustering and total: (%ds, %ds, %ds)" % (t1 - t0, t2 - t1, t2 - t0))
-#     # print('='*60)
-
-
-# def test(args):
-#     assert args.testing is True
-
-#     x, y, model = _make_data_and_model(args)
-#     model.model.summary()
-#     print('Begin testing:', '-' * 60)
-#     model.load_weights(args.weights)
-#     y_pred, y_mean_pred = model.predict_label(x=x)
-#     if y is not None:
-#         for view in range(len(x)):
-#             print('Final: acc=%.4f, nmi=%.4f, pur=%.4f' %
-#                     (Nmetrics.acc(y, y_pred[view]), Nmetrics.nmi(y, y_pred[view]), Nmetrics.pur(y, y_pred[view])))
-#         print('Final: acc=%.4f, nmi=%.4f, pur=%.4f' %
-#                   (Nmetrics.acc(y, y_mean_pred), Nmetrics.nmi(y, y_mean_pred), Nmetrics.pur(y, y_mean_pred)))
-    
-#     print('End testing:', '-' * 60)
-
 def substitute_variables(value, variables):
 	if isinstance(value, str):  # 只替换字符串
 		return string.Template(value).safe_substitute(variables)
@@ -213,12 +127,3 @@ if __name__ == "__main__":
             trainer.pre_train()
         print('trian')
         trainer.train()
-    # testing
-    # if args.testing:
-    #     test(args)
-    # else:
-    #     train(args)
-    #     args.testing = True
-    #     print()
-    #     print('-------------testing------------------')
-    #     test(args)
