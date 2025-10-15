@@ -111,6 +111,3 @@ class MSGMVC(nn.Module):
         self.to(device)
         self.eval()  # 如果是推理用
         return self
-
-if __name__ == "__main__":
-    model = MIMVC(1,1,[1])
