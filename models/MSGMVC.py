@@ -17,7 +17,7 @@ from autoencoders import Encoder, Decoder
 from generator import Generator
 from cluser_layer import ClusteringLayer
 
-class MIMVC(nn.Module):
+class MSGMVC(nn.Module):
     def __init__ (
             self, 
             num_samples, 
